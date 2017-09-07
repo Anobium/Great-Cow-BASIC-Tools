@@ -1,0 +1,121 @@
+== PWM Calculator
+
+
+=== Introduction
+
+These programs are utilities for Great Cow BASIC.
+
+
+To use:
+
+Edit the source/origin calculator program.  Set the chip freq, pwm freq and duty.
+Then, in the IDE, generate ASM.
+
+
+And, you get will be presented with
+
+----
+    Warning: ' Great Cow BASIC:
+    Warning: ' Info: Chip Freq =  16
+    Warning: ' Info: PWM Freq  =  38
+    Warning: ' Info: PWM Duty  =  50
+    Warning:
+    Warning: ' Info: x = timer number, typically user timer 2
+    Warning: TxCON = TxCON or 0 ' Set Timer x PostScaler = 1
+    Warning: TMRxIF = 0
+    Warning: TMRxON = 1
+    Warning: PRx =  105
+    Warning: '
+    Warning: ' Info: DutyCycle Calculate =  212
+    Warning: ' Info: x = PMW module
+    Warning: PWMxCON = 0b11000000
+    Warning: PWMxDCH =  53
+    Warning: PWMxDCL =  0
+    Warning: 'DIR port.pin out
+----
+
+Cut the this dialog from the IDE into a program
+
+----
+    #chip 10f322, 16
+    #config OSC= INTOSC
+
+    Warning: ' Great Cow BASIC:
+    Warning: ' Info: Chip Freq =  16
+    Warning: ' Info: PWM Freq  =  38
+    Warning: ' Info: PWM Duty  =  50
+    Warning:
+    Warning: ' Info: x = timer number, typically user timer 2
+    Warning: TxCON = TxCON or 0 ' Set Timer x PostScaler = 1
+    Warning: TMRxIF = 0
+    Warning: TMRxON = 1
+    Warning: PRx =  105
+    Warning: '
+    Warning: ' Info: DutyCycle Calculate =  212
+    Warning: ' Info: x = PMW module
+    Warning: PWMxCON = 0b11000000
+    Warning: PWMxDCH =  53
+    Warning: PWMxDCL =  0
+    Warning: 'DIR port.pin out
+----
+
+Now, using the editor, remove Warning: and you get
+
+----
+    #chip 10f322, 16
+    #config OSC= INTOSC
+
+    ' Great Cow BASIC:
+    ' Info: Chip Freq =  16
+    ' Info: PWM Freq  =  38
+    ' Info: PWM Duty  =  50
+
+    ' Info: x = timer number, typically user timer 2
+    TxCON = TxCON or 0 ' Set Timer x PostScaler = 1
+    TMRxIF = 0
+    TMRxON = 1
+    PRx =  105
+    '
+    ' Info: DutyCycle Calculate =  212
+    ' Info: x = PMW module
+    PWMxCON = 0b11000000
+    PWMxDCH =  53
+    PWMxDCL =  0
+    'DIR port.pin out
+----
+
+Edit the generated code. Change the timer (5 places) and the PWM channel (3 places)
+
+This is completed code.
+
+----
+    #chip 10f322, 16
+    #config OSC= INTOSC
+
+    ' Great Cow BASIC:
+    ' Info: Chip Freq =  16
+    ' Info: PWM Freq  =  38
+    ' Info: PWM Duty  =  50
+
+    ' Info: x = timer number, typically user timer 2
+    T2CON = T2CON or 0 ' Set Timer x PostScaler = 1
+    TMR2IF = 0
+    TMR2ON = 1
+    PR2 =  105
+    '
+    ' Info: DutyCycle Calculate =  212
+    ' Info: x = PMW module
+    PWM2CON = 0b11000000
+    PWM2DCH =  53
+    PWM2DCL =  0
+
+    DIR porta.1 out
+
+    Do
+    Loop
+----
+
+IT WORKS… seconds.  It took me 22 seconds to set the PWM.
+
+
+++++
