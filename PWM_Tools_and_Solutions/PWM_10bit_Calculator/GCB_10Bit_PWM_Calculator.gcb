@@ -1,7 +1,7 @@
 'A real simply and easy 10-bit PWM calculator with 0-100% duty cycle range:  Sept 2017 Anobium
 
 
-#chip 10f322, 16        'Use a chip with the correct operating frequency!
+#chip 16f18855, 32        'Use a chip with the correct operating frequency!
 
 #define PWM_Freq 38     'Set frequency in KHz, just change the number
 #define PWM_Duty 50     'Set duty cycle to 0-100%, just change the number
@@ -36,6 +36,8 @@
 
 '    v1.00 6/9/17 Evan R. Venn
 '    v1.01 7/9/17 Evan R. Venn. Corrected Prescaler
+'    v1.02 7/9/17 Evan R. Venn. Corrected Clock source
+
 
 
 
@@ -107,17 +109,20 @@
 
 
         if Tx_PR = 1 Then
-          warning "TxCON = TxCON or 0 ' Set Timer x PostScaler = 1"
+          warning "TxCON = TxCON or 0 ' Set Timer x PreScaler = 1"
         end if
         if Tx_PR = 4 Then
-          warning "TxCON = TxCON or 1 ' Set Timer x PostScaler = 4"
+          warning "TxCON = TxCON or 1 ' Set Timer x PreScaler = 4"
         end if
         if Tx_PR = 16 Then
-          warning "TxCON = TxCON or 2 ' Set Timer x PostScaler = 16"
+          warning "TxCON = TxCON or 2 ' Set Timer x PreScaler = 16"
         end if
 
         PRx_Temp_Calc = int( PRx_Temp_Calc * 1 )
 
+        if var(T2CLKCON) Then
+            warning "TxCLKCON = 0b00000001 'Select Timer source as FOSC/4"
+        end if
 
         warning "TMRxIF = 0"
         warning "TMRxON = 1"
