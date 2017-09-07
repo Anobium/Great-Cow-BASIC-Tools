@@ -1,0 +1,9 @@
+== Applications
+
+
+=== Introduction
+
+These are the pages and the software are used to generate the Great Cow BASIC user code.
+
+The source files in this structure are not mine and the rights are retained by the authors.
+++++
