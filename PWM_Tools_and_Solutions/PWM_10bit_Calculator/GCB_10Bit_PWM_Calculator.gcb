@@ -35,7 +35,7 @@
 '    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 '    v1.00 6/9/17 Evan R. Venn
-
+'    v1.01 7/9/17 Evan R. Venn. Corrected Prescaler
 
 
 
@@ -89,9 +89,9 @@
 
 
         Tx_PR = 1
-        PRx_Temp_Calc = PWMOsc1_Calc / PWM_Freq
+        PRx_Temp_Calc = int(PWMOsc1_Calc) / int(PWM_Freq)
 
-        IF Int(PRx_Temp_Calc / 256 ) > 1 then
+        IF Int(PRx_Temp_Calc / 256 ) > 0 then
           Tx_PR = 4
           'Divide by 4
           PRx_Temp_Calc = PRx_Temp_Calc / 4

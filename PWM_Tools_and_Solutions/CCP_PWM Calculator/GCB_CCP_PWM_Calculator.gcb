@@ -1,10 +1,10 @@
 'A real simply and easy CCP/PWM calculator with 0-100% duty cycle range:  Sept 2017 Anobium
 
 
-#chip 16F877a, 16        'Use a chip with the correct operating frequency!
+#chip 16F690, 8       'Use a chip with the correct operating frequency!
 
 #define PWM_Freq 38     'Set frequency in KHz, just change the number
-#define PWM_Duty 25     'Set duty cycle to 0-100%, just change the number
+#define PWM_Duty 50     'Set duty cycle to 0-100%, just change the number
 
 ''' Do not change below.
 ''' Cut and paste warning to your code
@@ -35,7 +35,7 @@
 
 '    v1.00 6/9/17 Evan R. Venn
 '    v1.01 7/9/17 Evan R. Venn
-
+'    v1.02 7/9/17 Evan R. Venn. Corrected Prescaler
 
 
 
@@ -90,9 +90,9 @@
 
 
         Tx_PR = 1
-        PRx_Temp_Calc = PWMOsc1_Calc / PWM_Freq
+        PRx_Temp_Calc = int(PWMOsc1_Calc) / int(PWM_Freq)
 
-        IF Int(PRx_Temp_Calc / 256 ) > 1 then
+        IF Int(PRx_Temp_Calc / 256 ) > 0 then
           Tx_PR = 4
           'Divide by 4
           PRx_Temp_Calc = PRx_Temp_Calc / 4
@@ -108,13 +108,13 @@
 
 
         if Tx_PR = 1 Then
-          warning "T2CON = T2CON or 0 ' Set Timer 2 PostScaler = 1"
+          warning "T2CON = T2CON or 0 ' Set Timer 2 PreScaler = 1"
         end if
         if Tx_PR = 4 Then
-          warning "T2CON = T2CON or 1 ' Set Timer 2 PostScaler = 4"
+          warning "T2CON = T2CON or 1 ' Set Timer 2 PreScaler = 4"
         end if
         if Tx_PR = 16 Then
-          warning "T2CON = T2CON or 2 ' Set Timer 2 PostScaler = 16"
+          warning "T2CON = T2CON or 2 ' Set Timer 2 PreScaler = 16"
         end if
 
         PRx_Temp_Calc = int( PRx_Temp_Calc * 1 )
