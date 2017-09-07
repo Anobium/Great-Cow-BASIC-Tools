@@ -3,7 +3,7 @@
 
 #chip 16f18855, 32        'Use a chip with the correct operating frequency!
 
-#define PWM_Freq 38     'Set frequency in KHz, just change the number
+#define PWM_Freq 100    'Set frequency in KHz, just change the number
 #define PWM_Duty 50     'Set duty cycle to 0-100%, just change the number
 
 ''' Do not change below.
@@ -128,10 +128,14 @@
         warning "TMRxON = 1"
         warning "PRx = " PRx_Temp_Calc
         warning "'"
-        warning "' Info: DutyCycle Calculate = " DutyCycle
+        warning "' Info: DutyCycle Calculated = " DutyCycle
+        warning "' Info: DutyCycle = ( DutyCycleH * 4 ) + ( DutyCycleL  / 64 )"
         warning "' Info: x = PMW module"
         warning "PWMxCON = 0b11000000"   'Enable PWM Module, Module Output
         warning "PWMxDCH = " DutyCycleH
+
+        DutyCycleL = int(DutyCycleL * 64 )   'Move these bits to the bits <7:6>
+
         warning "PWMxDCL = " DutyCycleL
         warning "'"
         warning "'DIR port.pin out   'You may need to set the port to an output"
