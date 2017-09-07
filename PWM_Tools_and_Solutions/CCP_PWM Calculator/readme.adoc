@@ -1,0 +1,146 @@
+== PWM Calculator
+
+
+=== Introduction
+
+These programs are utilities for Great Cow BASIC.
+
+
+To use:
+
+Edit the source/origin calculator program.  Set the chip freq, pwm freq and duty.
+Then, in the IDE, generate ASM.
+
+
+And, you get will be presented with
+
+----
+    Warning: ' Great Cow BASIC:  A CCP/PWM calculator
+    Warning: ' Info: Chip Freq =  16
+    Warning: ' Info: PWM Freq  =  38
+    Warning: ' Info: PWM Duty  =  25
+    Warning:
+    Warning: ' Info: CCP/PWM uses Timer 2, edit assigned timer if appropriate.
+    Warning: T2CON = T2CON or 0 ' Set Timer 2 PostScaler = 1
+    Warning: TMR2IF = 0
+    Warning: TMR2ON = 1
+    Warning: PR2 =  105
+    Warning: '
+    Warning: ' Info: DutyCycle Calculate =  106
+    Warning: ' Info: x = CCP/PMW module
+    Warning: ' Info: Enable CCP/PWM Module, Module Output (the bits)
+    Warning: ' Info: and, set the Duty LSBs (as a decimal number)
+    Warning: CCP1CON = CCP1CON or 0b00001111 or  32
+    Warning: ' Info: Set duty MSB
+    Warning: CCPR1L =  26
+    Warning: 'DIR port.pin out   'You may need to set the port to an output
+
+----
+
+Cut the this dialog from the IDE into a program
+
+----
+    #chip 16f877a, 16
+
+    Warning: ' Great Cow BASIC:  A CCP/PWM calculator
+    Warning: ' Info: Chip Freq =  16
+    Warning: ' Info: PWM Freq  =  38
+    Warning: ' Info: PWM Duty  =  25
+    Warning:
+    Warning: ' Info: CCP/PWM uses Timer 2, edit assigned timer if appropriate.
+    Warning: T2CON = T2CON or 0 ' Set Timer 2 PostScaler = 1
+    Warning: TMR2IF = 0
+    Warning: TMR2ON = 1
+    Warning: PR2 =  105
+    Warning: '
+    Warning: ' Info: DutyCycle Calculate =  106
+    Warning: ' Info: x = CCP/PMW module
+    Warning: ' Info: Enable CCP/PWM Module, Module Output (the bits)
+    Warning: ' Info: and, set the Duty LSBs (as a decimal number)
+    Warning: CCP1CON = CCP1CON or 0b00001111 or  32
+    Warning: ' Info: Set duty MSB
+    Warning: CCPR1L =  26
+    Warning: 'DIR port.pin out   'You may need to set the port to an output
+
+
+    DIR portc.2 out   'You may need to set the port to an output
+
+    do
+    loop
+
+----
+
+Now, using the editor, 'remove Warning: ' and you get
+
+----
+      #chip 16f877a, 16
+
+    ' Great Cow BASIC:  A CCP/PWM calculator
+    ' Info: Chip Freq =  16
+    ' Info: PWM Freq  =  38
+    ' Info: PWM Duty  =  25
+
+    ' Info: CCP/PWM uses Timer 2, edit assigned timer if appropriate.
+    T2CON = T2CON or 0 ' Set Timer 2 PostScaler = 1
+    TMR2IF = 0
+    TMR2ON = 1
+    PR2 =  105
+    '
+    ' Info: DutyCycle Calculate =  106
+    ' Info: x = CCP/PMW module
+    ' Info: Enable CCP/PWM Module, Module Output (the bits)
+    ' Info: and, set the Duty LSBs (as a decimal number)
+    CCP1CON = CCP1CON or 0b00001111 or  32
+    ' Info: Set duty MSB
+    CCPR1L =  26
+    'DIR port.pin out   'You may need to set the port to an output
+
+
+    DIR portc.2 out   'You may need to set the port to an output
+
+    do
+    loop
+----
+
+Edit the generated code, if needed to change the CCP channel, the defaul is CCP/PWM 1.
+
+This is completed code.
+
+----
+     #chip 16f877a, 16
+
+    ' Great Cow BASIC:  A CCP/PWM calculator
+    ' Info: Chip Freq =  16
+    ' Info: PWM Freq  =  38
+    ' Info: PWM Duty  =  25
+
+    ' Info: CCP/PWM uses Timer 2, edit assigned timer if appropriate.
+    T2CON = T2CON or 0 ' Set Timer 2 PostScaler = 1
+    TMR2IF = 0
+    TMR2ON = 1
+    PR2 =  105
+    '
+    ' Info: DutyCycle Calculate =  106
+    ' Info: x = CCP/PMW module
+    ' Info: Enable CCP/PWM Module, Module Output (the bits)
+    ' Info: and, set the Duty LSBs (as a decimal number)
+    CCP1CON = CCP1CON or 0b00001111 or  32
+    ' Info: Set duty MSB
+    CCPR1L =  26
+    'DIR port.pin out   'You may need to set the port to an output
+
+
+    DIR portc.2 out   'You may need to set the port to an output
+
+    do
+    loop
+----
+
+Now, compile and program your chip.  CCP/PWM should be operational.
+
+Enjoy,
+
+Anobium
+
+
+++++
