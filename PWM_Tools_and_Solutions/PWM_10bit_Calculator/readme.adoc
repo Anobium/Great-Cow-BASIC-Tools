@@ -115,7 +115,11 @@ This is completed code.
     Loop
 ----
 
-IT WORKS… seconds.  It took me 22 seconds to set the PWM.
+Now, compile and program your chip.  PWM should be operational.
+
+Enjoy,
+
+Anobium
 
 
 ++++
