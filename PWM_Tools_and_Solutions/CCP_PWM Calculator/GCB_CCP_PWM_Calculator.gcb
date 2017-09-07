@@ -3,14 +3,13 @@
 
 #chip 16F877a, 16        'Use a chip with the correct operating frequency!
 
-#define PWM_Freq 8     'Set frequency in KHz, just change the number
-#define PWM_Duty 50     'Set duty cycle to 0-100%, just change the number
+#define PWM_Freq 38     'Set frequency in KHz, just change the number
+#define PWM_Duty 25     'Set duty cycle to 0-100%, just change the number
 
 ''' Do not change below.
 ''' Cut and paste warning to your code
-''' Remove 'Warning's from your code but using Replace 'Warning' with nothing.
-''' Choose and set your timer - replace the 'x' five (5) times
-''' Choose and set your PWM model - replace the 'x' three (3) times
+''' Remove 'Warning's from your code but using Replace 'Warning: ' with nothing.
+''' If you want another CCP module edit CCPx???? assigments, where x is your selected CCP channel number.
 
 
 ''' Do not change below this line unless you know what you are doing.
@@ -35,6 +34,8 @@
 '    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 '    v1.00 6/9/17 Evan R. Venn
+'    v1.01 7/9/17 Evan R. Venn
+
 
 
 
@@ -82,7 +83,7 @@
 
         DutyCycle = (PWM_Duty / 25) * (PR2Temp + 1)
         DutyCycleH = (DutyCycle AND 1020)/4
-        DutyCycleL = DutyCycle AND 3
+        DutyCycleL = int(DutyCycle AND 3)
         DutyCycle = int(DutyCycle * 1 )
 
         PWMOsc1_Calc = int(60000/(240/ChipMHz))    'This is used in the calculations
@@ -125,9 +126,22 @@
         warning "'"
         warning "' Info: DutyCycle Calculate = " DutyCycle
         warning "' Info: x = CCP/PMW module"
-        warning "CCP1CON = 0b00001111"   'Enable CCP/PWM Module, Module Output
-        warning "CCPR1L = " DutyCycleH
-        warning "CCPR1H = " DutyCycle
+
+        if NoBIT(CCP1FMT) then  'this test treats the CCP variants
+          DutyCycleL  = int( DutyCycleL * 16 )    'move the two LSBs in DutyCycleL to bits <5:4>
+          warning "' Info: Enable CCP/PWM Module, Module Output (the bits)"
+          warning "' Info: and, set the Duty LSBs (as a decimal number)"
+          warning "CCP1CON = CCP1CON or 0b00001111 or " DutyCycleL
+          warning "' Info: Set duty MSB"
+          warning "CCPR1L = " DutyCycleH
+        end if
+
+        if BIT(CCP1FMT) then
+            warning "CCP1CON = 0b00001111"   'Enable CCP/PWM Module, Module Output
+            warning "CCPR1H = " DutyCycleH
+            warning "CCPR1L = " DutyCycleL
+
+        end if
         warning "'"
         warning "'DIR port.pin out   'You may need to set the port to an output"
 
