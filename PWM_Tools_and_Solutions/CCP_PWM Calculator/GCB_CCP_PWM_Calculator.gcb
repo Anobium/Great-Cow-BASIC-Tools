@@ -119,8 +119,7 @@
           warning "T2CON = T2CON or 2 ' Set Timer 2 PreScaler = 16"
         end if
 
-       ' PRx_Temp_Calc = int( PRx_Temp_Calc * 1 )
-
+        PRx_Temp_Calc = int( PRx_Temp_Calc * 1 )
 
         warning "TMR2IF = 0"
         warning "TMR2ON = 1"
