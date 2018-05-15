@@ -1,0 +1,87 @@
+Version 1.15 (Feb 21, 2008)
+	- AddFMUL calculator
+	- Make Watchdog and ASCII calculators wider so that tab selection
+	bar will not need to scroll.
+	
+Version 1.14 (Feb 20, 2008)
+	- Remove mon-functional FMUL tab (feature not yet implemented)
+	
+Version 1.13 (Feb 20, 2008)
+	- Fix error in Timer calculator when entering a desired frequency of 0
+	- Fix off-by-one error in TCNT Base
+	- Change Timer "Requested Timing" numeric value with changing
+	  timer units
+	- Rework display of Baud calcuator to better group related fields
+	
+Version 1.12 (Feb 15, 2008)
+	- Fix PWM Normal frequencies in Timer calculator
+	- Added baud rate of 76800 and slightly changed two other baud rates
+	- Change Baud display to be more horizontal to match Timer aspect rate
+	- Add MD5 hash sums to distribution
+	
+Version 1.11 (Feb 10, 2008)
+	- Fix bug when push enter in "Desired Time" in Timer calculator
+	- Fix scaling bug in displaying CTC frequency
+	
+Version 1.10 (Feb 5, 2008)
+	- Timer calculator more horizontally oriented to better fit screens
+	- Fix bug prevent computing correct UBRR values of 0
+	
+Version 1.9 (Feb 5, 2008)
+	- Center application on screen
+	- Use tabbed layout
+	- Add TWI calculator
+	- Add a common clock frequency to popup list
+	- New computed values display for better compatibility with themes
+	- Change save file format to XML
+        - Fix off-by-one bug in CTC calculator
+	
+Version 1.8 (Jan 19, 2008)
+	- Fix error when "Request Timing" is 0
+	- Don't display OCRA/OCRB frequencies when input is blank
+	- Remove uncommon clock frequencies
+	- Fix error in 32-bit Number Calculator when entering negative decimal
+	- Improve number formatting in Acceptable Common Clocks
+	- Change visual display of computed values for greater readability
+	
+Version 1.7 (Jan 18, 2008)
+	- Move watchdog section
+	- Match formatting of clocks speeds between two sections
+	
+Version 1.6 (Jan 18, 2008)
+	- Add more clock frequencies and baud rates
+	- Fix title of "Desired Baud" subsection
+	- Fix background color of About popup
+	- Fix Linux version
+
+Version 1.5 (Jan 17, 2008)
+	- With cursor in "Desired Timing Value", the enter key will update
+	computations. This used to require navigating away from the field.
+	- Add zeros to break the 32-bit hexadecimal display into bytes
+	- Add cycles and cycles error fields
+	- Add UBRR to Baud calculation
+	- Add string / hexadecimal / binary converterx
+	- Remove need for Convert buttons on 32-bit number calculator
+	- Add LICENSE file
+	- Further improve input checking
+	- Remove custom background colors
+	
+Version 1.4 (Jan 13, 2008)
+	- Rename to kavrcalc to avoid confusion with previous program
+	named avrcalc
+	- Add timing units of Sec, KHz, and MHz
+	- Add list of acceptable common clock speeds for a baud rate
+	- Significantly improve PWM calculator
+	- Fix errors due to invalid input values
+
+Version 1.3 (Jan 13, 2008)
+	- Add Watchdog timer	
+
+Version 1.2 (Jan 13, 2008)
+	- Add synchronous USART mode
+
+Version 1.1 (Jan 12, 2008)
+	- Add PWM frequencies.
+	
+Version 1.0 (Jan 12, 2008)
+	- Initial public release.
